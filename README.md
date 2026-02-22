@@ -30,14 +30,14 @@ digital art (fictional demons) • piano • bipedal locomotion
 
 ## ⚡ System Diagnostics
 
-> I am a CS ENGINEER [cite: 4] [cite_start]currently studying at PES University, RR campus, Bengaluru [cite: 19] [cite_start]with a CGPA of 9.00[cite: 24]. [cite_start]I have diverse expertise in a number of Computer Science fields including UI/UX design, full stack development, RAG based systems, reinforcement learning, software engineering etc[cite: 8]. Beyond web architectures, my core technical passion lies in low-level systems programming, high-performance computing, and training bipedal robots for rough terrain. [cite_start]I'm often taken into project teams and research groups due to my interest and curiosity to learn anything that comes my way[cite: 8].
+> I am a CS engineer currently studying at PES University, RR Campus, Bengaluru, with a CGPA of 9.00. I have diverse expertise across a number of Computer Science fields including UI/UX design, full-stack development, RAG-based systems, reinforcement learning, and software engineering. Beyond web architectures, my core technical passion lies in low-level systems programming, high-performance computing, and training bipedal robots for rough terrain. I'm frequently brought into project teams and research groups driven by my curiosity to learn whatever comes my way.
 
 <br>
 
 ## 🛠️ Technical Arsenal
 
 <div align="center">
-  
+
 **Core Languages**<br>
 <img src="https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white" alt="Rust"/>
 <img src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="C++"/>
@@ -46,7 +46,8 @@ digital art (fictional demons) • piano • bipedal locomotion
 <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="Python"/>
 <img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java"/>
 <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" alt="JavaScript"/>
-[cite_start]*(Including C#, MATLAB, SQL)* [cite: 10]
+
+*Also: C#, MATLAB, SQL*
 
 <br><br>
 
@@ -57,7 +58,8 @@ digital art (fictional demons) • piano • bipedal locomotion
 <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
 <img src="https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white" alt="Kubernetes"/>
 <img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB"/>
-[cite_start]*(Including WebSockets, TURN servers, HTML/CSS, Shadcn, Tailwind)* [cite: 11, 12]
+
+*Also: WebSockets, TURN servers, HTML/CSS, Shadcn, Tailwind*
 
 <br><br>
 
@@ -68,7 +70,8 @@ digital art (fictional demons) • piano • bipedal locomotion
 <img src="https://img.shields.io/badge/unrealengine-%23313131.svg?style=for-the-badge&logo=unrealengine&logoColor=white" alt="Unreal"/>
 <img src="https://img.shields.io/badge/blender-%23F5792A.svg?style=for-the-badge&logo=blender&logoColor=white" alt="Blender"/>
 <img src="https://img.shields.io/badge/GODOT-%23FFFFFF.svg?style=for-the-badge&logo=godot-engine" alt="Godot"/>
-[cite_start]*(Including Raylib, Unity, Bayesian statistics, Hidden Markov Models, Imitation Learning)* [cite: 11, 12]
+
+*Also: Raylib, Unity, Bayesian Statistics, Hidden Markov Models, Imitation Learning*
 
 </div>
 
@@ -91,11 +94,11 @@ digital art (fictional demons) • piano • bipedal locomotion
   <tr>
     <td width="50%" valign="top">
       <h3>🥽 VRDistributed</h3>
-      [cite_start]<p>Developed the client-side architecture for VRDistributed, a web-based platform that enabled immersive virtual reality remote desktop experiences using standard PCs and smartphones[cite: 33]. [cite_start]Implemented real-time communication with WebRTC and WebSockets, incorporated on-device hand gesture recognition with MediaPipe, and secured all data transfer with hybrid RSA-AES encryption[cite: 34].</p>
+      <p>Developed the client-side architecture for VRDistributed, a web-based platform enabling immersive virtual reality remote desktop experiences using standard PCs and smartphones. Implemented real-time communication with WebRTC and WebSockets, incorporated on-device hand gesture recognition with MediaPipe, and secured all data transfer with hybrid RSA-AES encryption.</p>
     </td>
     <td width="50%" valign="top">
       <h3>🧠 AlYou</h3>
-      [cite_start]<p>Built an open-source React-based frontend for large language models (LLMs), supporting advanced agent capabilities like Chain-of-Thought Reasoning, Autonomous Generation, and Tool Calls[cite: 37]. [cite_start]Developed UI/UX for seamless user interaction and modular integration with backend LLM services[cite: 38].</p>
+      <p>Built an open-source React-based frontend for large language models (LLMs), supporting advanced agent capabilities including Chain-of-Thought Reasoning, Autonomous Generation, and Tool Calls. Developed UI/UX for seamless user interaction and modular integration with backend LLM services.</p>
     </td>
   </tr>
 </table>
