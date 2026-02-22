@@ -12,7 +12,7 @@
 BTech CS @ PES University
 Soft Body Dynamics • Reinforcement Learning • Concurrent Network Programming
 
-digital art (fictional demons) • piano • bipedal locomotion
+digital art • piano • bipedal locomotion
 </pre>
 
 <br>
