@@ -2,11 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Alien%20Monster.png" width="120" align="right" alt="Profile Mascot" />
 
-<br>
-
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=35&duration=4000&pause=800&color=FCA311&center=true&vCenter=true&multiline=true&repeat=false&width=900&height=120&lines=Initializing+system...;User:+PRAKYATH+P+NAYAK;Node:+Heimir;Status:+Compiling+Engine..." alt="Typing SVG" />
-
-<br><br>
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=35&duration=4000&pause=800&color=FCA311&center=true&vCenter=true&multiline=true&repeat=false&width=900&height=150&lines=Initializing+system...;User:+PRAKYATH+P+NAYAK;Status:+Compiling+Engine..." alt="Typing SVG" />
 
 <pre>
 BTech CS @ PES University
