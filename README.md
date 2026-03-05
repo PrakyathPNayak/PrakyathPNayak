@@ -1,109 +1,115 @@
-<div align="center">
-
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Alien%20Monster.png" width="120" align="right" alt="Profile Mascot" />
-
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=35&duration=4000&pause=800&color=FCA311&center=true&vCenter=true&multiline=true&repeat=false&width=900&height=150&lines=Initializing+system...;User:+PRAKYATH+P+NAYAK;Status:+Compiling+Engine..." alt="Typing SVG" />
-
-<pre>
-BTech CS @ PES University
-Soft Body Dynamics • Reinforcement Learning • Concurrent Network Programming
-
-digital art • piano • bipedal locomotion
-</pre>
-
-<br>
-
-<a href="https://linkedin.com/in/prakyathpnayak">
-  <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
-</a>
-<a href="mailto:prakyathnayakp@gmail.com">
-  <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/>
-</a>
-
-</div>
-
-<br><br>
-
-## ⚡ System Diagnostics
-
-> I am a CS engineer currently studying at PES University, RR Campus, Bengaluru, with a CGPA of 9.00. I have diverse expertise across a number of Computer Science fields including UI/UX design, full-stack development, RAG-based systems, reinforcement learning, and software engineering. Beyond web architectures, my core technical passion lies in low-level systems programming, high-performance computing, and training bipedal robots for rough terrain. I'm frequently brought into project teams and research groups driven by my curiosity to learn whatever comes my way.
-
-<br>
-
-## 🛠️ Technical Arsenal
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0,C8A96E,7EB8A4,0f3460&height=200&section=header&text=Prakyath%20P%20Nayak&fontSize=52&fontColor=ffffff&fontAlignY=45&animation=fadeIn&desc=Systems%20%C2%B7%20Robotics%20%C2%B7%20Graphics%20%C2%B7%20Distributed%20Computing&descSize=15&descAlignY=65&descAlign=50&descColor=e8e4dc&stroke=ddff77&strokeWidth=0" width="100%"/>
 
 <div align="center">
 
-**Core Languages**<br>
-<img src="https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white" alt="Rust"/>
-<img src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="C++"/>
-<img src="https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white" alt="C"/>
-<img src="https://img.shields.io/badge/go-%2300ADD8.svg?style=for-the-badge&logo=go&logoColor=white" alt="Go"/>
-<img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="Python"/>
-<img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java"/>
-<img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" alt="JavaScript"/>
+<img src="https://readme-typing-svg.demolab.com?font=DM+Mono&weight=500&size=13&duration=3000&pause=1000&color=C8A96E&center=true&vCenter=true&width=500&height=28&lines=Low-level+systems+%2F+Rust+%2F+C%2B%2B;Bipedal+locomotion+%2F+RL+research;Graphics+%2F+simulation+%2F+game+engines;Full-stack+%2F+distributed+systems" alt="Typing SVG" />
 
-*Also: C#, MATLAB, SQL*
-
-<br><br>
-
-**Web, Infrastructure & Distributed Systems**<br>
-<img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="React"/>
-<img src="https://img.shields.io/badge/WebRTC-333333?style=for-the-badge&logo=webrtc&logoColor=white" alt="WebRTC"/>
-<img src="https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white" alt="Django"/>
-<img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
-<img src="https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white" alt="Kubernetes"/>
-<img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB"/>
-
-*Also: WebSockets, TURN servers, HTML/CSS, Shadcn, Tailwind*
-
-<br><br>
-
-**Machine Learning, Robotics & Graphics**<br>
-<img src="https://img.shields.io/badge/Reinforcement_Learning-FF6F00?style=for-the-badge&logo=probot&logoColor=white" alt="RL"/>
-<img src="https://img.shields.io/badge/MediaPipe-00B4D8?style=for-the-badge" alt="MediaPipe"/>
-<img src="https://img.shields.io/badge/OpenGL-%23FFFFFF.svg?style=for-the-badge&logo=opengl" alt="OpenGL"/>
-<img src="https://img.shields.io/badge/unrealengine-%23313131.svg?style=for-the-badge&logo=unrealengine&logoColor=white" alt="Unreal"/>
-<img src="https://img.shields.io/badge/blender-%23F5792A.svg?style=for-the-badge&logo=blender&logoColor=white" alt="Blender"/>
-<img src="https://img.shields.io/badge/GODOT-%23FFFFFF.svg?style=for-the-badge&logo=godot-engine" alt="Godot"/>
-
-*Also: Raylib, Unity, Bayesian Statistics, Hidden Markov Models, Imitation Learning*
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/prakyathpnayak)
+[![Email](https://img.shields.io/badge/Email-C8A96E?style=flat-square&logo=gmail&logoColor=white)](mailto:prakyathnayakp@gmail.com)
+[![PES University](https://img.shields.io/badge/PES%20University-CGPA%209.00-7EB8A4?style=flat-square)](https://pes.edu)
+![Profile Views](https://komarev.com/ghpvc/?username=PrakyathPNayak&style=flat-square&color=6b6560&label=profile+views)
 
 </div>
 
-<br>
+```yaml
+name     : Prakyath P Nayak
+degree   : BTech Computer Science — PES University, RR Campus, Bengaluru
+cgpa     : 9.00 / 10.00
+focus    : [ low-level systems, bipedal locomotion, high-performance computing, UI/UX design ]
+building : [ Ambara, Joduga, Cassie RL Control ]
+contact  : prakyathnayakp@gmail.com
+linkedin : linkedin.com/in/prakyathpnayak
+outside  : [ digital art, piano, flute ]
+```
 
-## 🚀 Deployed Architectures & Research
+---
 
-<table width="100%">
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🦀 Ambara & xpbdrs</h3>
-      <p><b>Ambara:</b> A node-based image processing engine built entirely with Rust and Tauri for high-performance visual workflows.</p>
-      <p><b>xpbdrs:</b> A soft body simulation engine written in Rust, leveraging Extended Position Based Dynamics (XPBD) to model complex physical interactions and soft body cutting dynamics.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🤖 Cassie Bipedal RL Control</h3>
-      <p>A multi-phase Reinforcement Learning project focused on achieving stable bipedal locomotion for the Cassie robot across rough terrain. Currently exploring Supervised Action Pruning and advanced transformer architectures for real-time motor control.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🥽 VRDistributed</h3>
-      <p>Developed the client-side architecture for VRDistributed, a web-based platform enabling immersive virtual reality remote desktop experiences using standard PCs and smartphones. Implemented real-time communication with WebRTC and WebSockets, incorporated on-device hand gesture recognition with MediaPipe, and secured all data transfer with hybrid RSA-AES encryption.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🧠 AlYou</h3>
-      <p>Built an open-source React-based frontend for large language models (LLMs), supporting advanced agent capabilities including Chain-of-Thought Reasoning, Autonomous Generation, and Tool Calls. Developed UI/UX for seamless user interaction and modular integration with backend LLM services.</p>
-    </td>
-  </tr>
+### Stack
+
+**Languages**
+
+[![Skills](https://skillicons.dev/icons?i=go,rust,cpp,c,python,java,ts&theme=dark)](https://skillicons.dev)
+
+
+**Infrastructure & Web**
+
+[![Skills](https://skillicons.dev/icons?i=react,django,docker,kubernetes,tauri&theme=dark)](https://skillicons.dev)
+
+`WebRTC` &nbsp; `WebSockets` &nbsp; `TURN Servers` &nbsp; `Tailwind` &nbsp; `Shadcn`
+
+**Graphics & Simulation**
+
+[![Skills](https://skillicons.dev/icons?i=blender,unity,godot,threejs,unreal&theme=dark)](https://skillicons.dev)
+
+`Raylib` &nbsp; `MediaPipe`
+
+**Research**
+
+`Reinforcement Learning` &nbsp; `Imitation Learning` &nbsp; `Hidden Markov Models` &nbsp; `Bayesian Statistics` &nbsp; `Transformer Architectures`
+
+---
+
+### Projects
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**Ambara** &nbsp; <sub>`Rust` `Tauri`</sub>
+
+Node-based image processing engine for high-performance visual workflows. Fully composable, non-destructive pipeline architecture.
+
+</td>
+<td width="50%" valign="top">
+
+**xpbdrs** &nbsp; <sub>`Rust` `XPBD`</sub>
+
+Soft body simulation engine using Extended Position Based Dynamics. Real-time physical interaction modelling and cutting dynamics.
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+**Cassie Bipedal RL Control** &nbsp; <sub>`RL` `Transformers`</sub>
+
+Multi-phase reinforcement learning for stable locomotion across rough terrain. Exploring Supervised Action Pruning and real-time transformer-based motor control.
+
+</td>
+<td width="50%" valign="top">
+
+**VRDistributed** &nbsp; <sub>`WebRTC` `MediaPipe` `RSA-AES`</sub>
+
+Client architecture for a web-based VR remote desktop platform. Real-time comms, on-device gesture recognition, end-to-end hybrid encryption.
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+**AlYou** &nbsp; <sub>`React` `LLM`</sub>
+
+Open-source frontend for large language models. Supports Chain-of-Thought reasoning, Autonomous Generation, and Tool Calls with modular backend integration.
+
+</td>
+<td></td>
+</tr>
 </table>
 
-<br>
+---
 
-## 📊 Telemetry
+### Stats
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=PrakyathPNayak&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117" alt="GitHub Stats" width="48%" />
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=PrakyathPNayak&theme=tokyonight&hide_border=true&background=0D1117" alt="GitHub Streak" width="48%" />
+
+<img src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=PrakyathPNayak&theme=github_dark" width="100%" />
+
+<img src="http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=PrakyathPNayak&theme=github_dark" width="32%" />
+<img src="http://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=PrakyathPNayak&theme=github_dark" width="32%" />
+<img src="http://github-profile-summary-cards.vercel.app/api/cards/stats?username=PrakyathPNayak&theme=github_dark" width="32%" />
+
+<img src="https://streak-stats.demolab.com?user=PrakyathPNayak&hide_border=true&background=0D1117&ring=C8A96E&fire=C8A96E&currStreakLabel=C8A96E&sideLabels=6b6560&currStreakNum=e8e4dc&sideNums=e8e4dc&dates=6b6560&stroke=1a1a2e" width="60%" />
+
 </div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0,0f3460,1a1a2e,0d0d0d&height=80&section=footer" width="100%"/>
