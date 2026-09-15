@@ -284,6 +284,11 @@
   border: none;
   display: block;
   background: #000;
+  z-index: 2;
+}
+
+.frame-video.playing .play-badge {
+  display: none;
 }
 
 /* ---------- art description toast (shown when zoomed into an artwork/video) ---------- */
@@ -317,6 +322,7 @@
 .art-toast.show {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
   transform: translateX(-50%) translateY(0);
   transition:
     opacity 0.35s ease,

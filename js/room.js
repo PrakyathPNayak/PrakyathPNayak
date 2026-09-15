@@ -61,9 +61,11 @@
       id: "video-1",
       type: "video",
       name: "Ayasa - The Reason Why (Piano Cover)",
-      description: "The only cover I've managed to produce with a proper synthasia scroll alignment to the piano",
+      description:
+        "The only cover I've managed to produce with a proper synthasia scroll alignment to the piano",
       src: "images/thumb_video_1.jpg",
       videoId: "hqhT2fbeE6w",
+      embedUrl: "https://www.youtube.com/embed/hqhT2fbeE6w?si=k1hu1hNOLEJGpmdh",
       aspect: 16 / 9,
       left: 9.5,
       bottom: 23.0,
@@ -90,8 +92,7 @@
       id: "drawing-2",
       type: "image",
       name: "The game",
-      description:
-        "Art for a horror game we made. Good times!",
+      description: "Art for a horror game we made. Good times!",
       src: "images/drawing_2.webp",
       fallback: "images/drawing_2.png",
       aspect: 0.707,
@@ -104,8 +105,7 @@
       id: "drawing-4",
       type: "image",
       name: "Anya the clueless",
-      description:
-        "A work from memory of a scene from Spy x Family",
+      description: "A work from memory of a scene from Spy x Family",
       src: "images/drawing_4.webp",
       fallback: "images/drawing_4.png",
       aspect: 16 / 9,
@@ -120,8 +120,7 @@
       id: "drawing-7",
       type: "image",
       name: "Boy",
-      description:
-        "Redraw of a random sketch I found on Google while browsing something to draw",
+      description: "Redraw of a random sketch I found on Google while browsing something to draw",
       src: "images/drawing_7.webp",
       fallback: "images/drawing_7.jpeg",
       aspect: 0.702,
@@ -148,9 +147,11 @@
       id: "video-2",
       type: "video",
       name: "Who's that P0k3mon?",
-      description: "My attempt at animating a popular character from a popular series (please don't sue me Nintendo🥀)",
+      description:
+        "My attempt at animating a popular character from a popular series (please don't sue me Nintendo🥀)",
       src: "images/thumb_video_2.jpg",
       videoId: "VqTtbqpxFxc",
+      embedUrl: "https://www.youtube.com/embed/VqTtbqpxFxc?si=gPz6NakxIzq7s_LO",
       aspect: 16 / 9,
       left: 67.5,
       bottom: 23.0,
@@ -193,11 +194,23 @@
 
   // Build framed artwork & video elements dynamically from GALLERY_ITEMS
   const artBtns = GALLERY_ITEMS.map((item, i) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = `frame frame-${item.id} ${item.type === "video" ? "frame-video" : "frame-image"}`;
+    const isVideo = item.type === "video";
+    const btn = document.createElement(isVideo ? "div" : "button");
+    if (!isVideo) {
+      btn.type = "button";
+    } else {
+      btn.setAttribute("role", "button");
+      btn.setAttribute("tabindex", "0");
+      btn.addEventListener("keydown", (ev) => {
+        if (ev.key === "Enter" || ev.key === " ") {
+          ev.preventDefault();
+          onArt(i);
+        }
+      });
+    }
+    btn.className = `frame frame-${item.id} ${isVideo ? "frame-video" : "frame-image"}`;
     btn.dataset.art = String(i);
-    btn.setAttribute("aria-label", `${item.type === "video" ? "Video" : "Artwork"}: ${item.name}`);
+    btn.setAttribute("aria-label", `${isVideo ? "Video" : "Artwork"}: ${item.name}`);
     btn.style.left = `${item.left}%`;
     btn.style.bottom = `${item.bottom}%`;
     btn.style.height = `${item.height}%`;
@@ -220,7 +233,7 @@
     };
     mat.appendChild(picture);
 
-    if (item.type === "video") {
+    if (isVideo) {
       const badge = document.createElement("div");
       badge.className = "play-badge";
       badge.setAttribute("aria-hidden", "true");
@@ -348,6 +361,7 @@
       activeVideoIframe.remove();
       activeVideoIframe = null;
     }
+    artBtns.forEach((btn) => btn.classList.remove("playing"));
   }
 
   function showArtToast(item) {
@@ -357,10 +371,15 @@
     if (artToastTitle) artToastTitle.textContent = item.name;
     if (artToastDesc) artToastDesc.textContent = item.description;
     if (artToastHint) {
-      artToastHint.textContent =
-        item.type === "video"
-          ? "playable video • click outside, press Esc or ↓ to return"
-          : "click again, press Esc or ↓ to return";
+      if (item.type === "video") {
+        if (window.location.protocol === "file:") {
+          artToastHint.innerHTML = `⚠️ YouTube embeds require a web server (run <code style="color:#f2e8c9">npm start</code>) and block file:// with Error 153 • <a href="https://youtu.be/${item.videoId}" target="_blank" rel="noopener noreferrer" style="color:#e4d6bf;text-decoration:underline;">Watch on YouTube ↗</a>`;
+        } else {
+          artToastHint.innerHTML = `playable video • click outside, press Esc or ↓ to return • <a href="https://youtu.be/${item.videoId}" target="_blank" rel="noopener noreferrer" style="color:#e4d6bf;text-decoration:underline;">open in YouTube ↗</a>`;
+        }
+      } else {
+        artToastHint.textContent = "click again, press Esc or ↓ to return";
+      }
     }
     artToast.classList.add("show");
   }
@@ -464,14 +483,28 @@
 
       // Mount interactive playable YouTube video player
       if (item.type === "video") {
-        const mat = artBtns[i].querySelector(".frame-mat");
+        const frameEl = artBtns[i];
+        frameEl.classList.add("playing");
+        const mat = frameEl.querySelector(".frame-mat");
         if (mat) {
           const iframe = document.createElement("iframe");
-          iframe.src = `https://www.youtube-nocookie.com/embed/${item.videoId}?autoplay=1&rel=0`;
-          iframe.title = item.name;
-          iframe.allow =
-            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          iframe.title = "YouTube video player";
+          iframe.setAttribute("frameborder", "0");
+          iframe.setAttribute(
+            "allow",
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+          );
+          iframe.referrerPolicy = "strict-origin-when-cross-origin";
+          iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+          iframe.setAttribute("allowfullscreen", "");
           iframe.allowFullscreen = true;
+
+          let url = item.embedUrl;
+          if (window.location.protocol.startsWith("http")) {
+            url += `&origin=${encodeURIComponent(window.location.origin)}`;
+          }
+          iframe.src = url;
+
           mat.appendChild(iframe);
           activeVideoIframe = iframe;
         }
@@ -494,12 +527,12 @@
     if (focused && focused.kind === "art" && focused.i === i) {
       const item = GALLERY_ITEMS[i];
       // For images, clicking the frame again steps back.
-      // For videos, do not immediately exit on frame click so video can be interacted with.
+      // For videos, stay focused so user can interact with the video player.
       if (item.type !== "video") {
         clearZoom();
         render();
-        return;
       }
+      return;
     }
     focusItem("art", i);
   }
