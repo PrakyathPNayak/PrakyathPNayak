@@ -15,6 +15,8 @@
  *          first click zooms in and toasts "click the door to open";
  *          clicking the zoomed door again follows its link. Esc, down, or
  *          any other arrow resets the zoom.
+ * Gallery: wall 3 hangs three copies of `images/drawing.png` at different
+ *          sizes. Click zooms in (click again, Esc, or down steps back).
  */
 (() => {
   "use strict";
@@ -24,9 +26,11 @@
   const toast = document.getElementById("room-toast");
   const scene = document.getElementById("room-scene");
   const doors = document.getElementById("doors");
+  const art = document.getElementById("art");
   const doorToastEl = document.getElementById("door-toast");
   const doorTag = document.getElementById("door-tag");
   const doorBtns = [...document.querySelectorAll("#doors .door")];
+  const artBtns = [...document.querySelectorAll("#art .frame")];
   const btns = {
     up: document.getElementById("arrow-up"),
     down: document.getElementById("arrow-down"),
@@ -37,6 +41,8 @@
   const WALL_SRC = "images/wall.jpg";
   const CEIL_SRC = "images/ceiling.jpg";
   const DOOR_WALL = 0;
+  const ART_WALL = 2;
+  const ART_LABEL = "digital art";
   const DOORS = [
     { name: "YouTube", url: "https://www.youtube.com/@ashinycube" },
     { name: "LinkedIn", url: "https://www.linkedin.com/in/prakyath-p-nayak/" },
@@ -53,18 +59,23 @@
     const pre = new Image();
     pre.src = btn.querySelector("img").getAttribute("src");
   }
+  for (const btn of artBtns) {
+    const pre = new Image();
+    pre.src = btn.querySelector("img").getAttribute("src");
+  }
 
   let started = false;
   let state = { type: "wall", i: 0 };
   let lastWall = 0;
-  let focused = null; // index into DOORS while zoomed, else null
+  let focused = null; // { kind: "door" | "art", i } while zoomed, else null
 
   const describe = () => {
     if (state.type === "ceiling") return "ceiling";
     const wall = `wall ${state.i + 1}`;
-    return focused !== null && state.i === DOOR_WALL
-      ? `${wall}, ${DOORS[focused].name} door`
-      : wall;
+    if (focused && focused.kind === "door" && state.i === DOOR_WALL)
+      return `${wall}, ${DOORS[focused.i].name} door`;
+    if (focused && focused.kind === "art" && state.i === ART_WALL) return `${wall}, artwork`;
+    return wall;
   };
 
   // Arrow visibility: on the ceiling all four show; on a wall up/left/right
@@ -114,6 +125,7 @@
       show(WALL_SRC, state.i % 2 === 1);
     }
     doors.classList.toggle("open", state.type === "wall" && state.i === DOOR_WALL);
+    art.classList.toggle("open", state.type === "wall" && state.i === ART_WALL);
     render();
   }
 
@@ -171,46 +183,92 @@
     return [lefts[i] + boxW * SLAB_CX, top + boxH * SLAB_CY];
   }
 
-  function focusDoor(i) {
-    focused = i;
-    const [cx, cy] = doorCentroid(i);
+  // Gallery art metrics: 1200x1694 frames, symmetric moulding, so the
+  // centroid is the box centre. Geometry comes from the SAME variables as
+  // css/room.css (.room-view custom properties), like the doors.
+  const ART_IMG_W = 1200;
+  const ART_IMG_H = 1694;
+  const ART_FRAMES = ["f0", "f1", "f2"];
+
+  function artCentroid(i) {
+    const cs = getComputedStyle(view);
+    const num = (name) => parseFloat(cs.getPropertyValue(name));
+    const W = scene.clientWidth;
+    const H = scene.clientHeight;
+    const p = ART_FRAMES[i];
+    const boxH = (num(`--${p}-h`) / 100) * H;
+    const boxW = (boxH * ART_IMG_W) / ART_IMG_H;
+    const left = (num(`--${p}-l`) / 100) * W;
+    const top = H - ((num(`--${p}-b`) / 100) * H + num("--art-lift")) - boxH;
+    return [left + boxW / 2, top + boxH / 2];
+  }
+
+  function focusItem(kind, i) {
+    focused = { kind, i };
+    // Doors and art both use analytic centroids from shared CSS variables,
+    // so layout and zoom can never drift.
+    const [cx, cy] = kind === "door" ? doorCentroid(i) : artCentroid(i);
     // Scale alone pins the origin in place; the translate carries the
-    // door centroid to the middle of the frame (matters for side doors).
+    // centroid to the middle of the frame (matters for side pieces).
     scene.style.transformOrigin = `${cx}px ${cy}px`;
     scene.style.setProperty("--zx", `${scene.clientWidth / 2 - cx}px`);
     scene.style.setProperty("--zy", `${scene.clientHeight / 2 - cy}px`);
     scene.classList.add("zoom");
-    doorToast("click the door to open");
-    showTag(DOORS[i].name);
+    if (kind === "door") {
+      doorToast("click the door to open");
+      showTag(DOORS[i].name);
+    } else {
+      doorToast("click again to step back");
+      showTag(ART_LABEL);
+    }
     render();
   }
 
   function onDoor(i) {
     if (!started) return;
-    if (focused === i) {
+    if (focused && focused.kind === "door" && focused.i === i) {
       window.open(DOORS[i].url, "_blank", "noopener,noreferrer");
       return;
     }
-    focusDoor(i);
+    focusItem("door", i);
+  }
+
+  function onArt(i) {
+    if (!started || !scene.clientWidth) return;
+    if (focused && focused.kind === "art" && focused.i === i) {
+      clearZoom();
+      render();
+      return;
+    }
+    focusItem("art", i);
+  }
+
+  function previewTag(label) {
+    if (focused !== null) return;
+    doorTag.textContent = label;
+    doorTag.classList.add("show");
+  }
+
+  function unpreviewTag() {
+    if (focused !== null) return;
+    doorTag.classList.remove("show");
   }
 
   doorBtns.forEach((btn, i) => {
     btn.addEventListener("click", () => onDoor(i));
-    // Hovering (or keyboard-focusing) a door previews its name tag —
-    // but never while zoomed.
-    const preview = () => {
-      if (focused !== null) return;
-      doorTag.textContent = DOORS[i].name;
-      doorTag.classList.add("show");
-    };
-    const unpreview = () => {
-      if (focused !== null) return;
-      doorTag.classList.remove("show");
-    };
-    btn.addEventListener("mouseenter", preview);
-    btn.addEventListener("mouseleave", unpreview);
-    btn.addEventListener("focus", preview);
-    btn.addEventListener("blur", unpreview);
+    // Hovering (or keyboard-focusing) previews the tag — never while zoomed.
+    btn.addEventListener("mouseenter", () => previewTag(DOORS[i].name));
+    btn.addEventListener("mouseleave", unpreviewTag);
+    btn.addEventListener("focus", () => previewTag(DOORS[i].name));
+    btn.addEventListener("blur", unpreviewTag);
+  });
+
+  artBtns.forEach((btn, i) => {
+    btn.addEventListener("click", () => onArt(i));
+    btn.addEventListener("mouseenter", () => previewTag(ART_LABEL));
+    btn.addEventListener("mouseleave", unpreviewTag);
+    btn.addEventListener("focus", () => previewTag(ART_LABEL));
+    btn.addEventListener("blur", unpreviewTag);
   });
 
   function go(dir) {

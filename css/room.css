@@ -29,6 +29,17 @@
   --door-yt: 0.5;
   --door-in: 33;
   --door-gh: 65.5;
+  /* Gallery geometry, same deal: js/room.js reads these for centroids. */
+  --art-lift: 300;
+  --f0-l: 18;
+  --f0-b: 17;
+  --f0-h: 46;
+  --f1-l: 40;
+  --f1-b: 17;
+  --f1-h: 36;
+  --f2-l: 57;
+  --f2-b: 40;
+  --f2-h: 24;
   box-shadow:
     0 0 0 1px rgba(242, 232, 201, 0.14),
     0 0 70px rgba(0, 0, 0, 0.95),
@@ -118,6 +129,67 @@
 
 .door-gh {
   left: calc(var(--door-gh) * 1% - var(--door-gap) * 1px);
+}
+
+/* ---------- gallery (wall 3): drawing.png at three sizes ---------- */
+
+.art {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.25s ease,
+    visibility 0s linear 0.25s;
+}
+
+.art.open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.25s ease;
+}
+
+.frame {
+  position: absolute;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.frame img {
+  height: 100%;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45));
+  transition: filter 0.2s ease;
+}
+
+.frame:hover img {
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45)) brightness(1.07);
+}
+
+.frame:focus-visible {
+  outline: 2px solid #c8a96e;
+  outline-offset: 6px;
+}
+
+.frame-0 {
+  left: calc(var(--f0-l) * 1%);
+  bottom: calc(var(--f0-b) * 1% + var(--art-lift) * 1px);
+  height: calc(var(--f0-h) * 1%);
+}
+
+.frame-1 {
+  left: calc(var(--f1-l) * 1%);
+  bottom: calc(var(--f1-b) * 1% + var(--art-lift) * 1px);
+  height: calc(var(--f1-h) * 1%);
+}
+
+.frame-2 {
+  left: calc(var(--f2-l) * 1%);
+  bottom: calc(var(--f2-b) * 1% + var(--art-lift) * 1px);
+  height: calc(var(--f2-h) * 1%);
 }
 
 /* Side tag: black rectangle, white Comic Sans, top-right. Names the site
