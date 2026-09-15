@@ -1,0 +1,21 @@
+{
+  "name": "prakyath-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Personal portfolio — film-style intro into a navigable room. Zero runtime dependencies.",
+  "type": "commonjs",
+  "scripts": {
+    "start": "serve .",
+    "serve": "serve .",
+    "check": "for f in js/*.js; do node --check \"$f\" || exit 1; done",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "serve": "^14.2.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

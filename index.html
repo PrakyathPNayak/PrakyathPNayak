@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prakyath P Nayak — Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio of Prakyath P Nayak — systems, robotics, graphics and distributed computing."
+    />
+    <meta name="theme-color" content="#0a0a0c" />
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Limelight&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/intro.css" />
+    <link rel="stylesheet" href="css/room.css" />
+  </head>
+  <body>
+    <!-- INTRO OVERLAY: dismiss with any key / click / tap.
+       When dismissed it fires `intro:complete` on window and calls
+       queued `Intro.onComplete` callbacks. Build the next scene behind
+       #app or listen for that event (see intro.js). -->
+    <div
+      id="intro"
+      role="button"
+      tabindex="0"
+      aria-label="Intro animation. Press any key or click anywhere to begin."
+    >
+      <canvas id="film"></canvas>
+      <div class="vignette" aria-hidden="true"></div>
+      <header class="titles" aria-hidden="true">
+        <p id="line1" class="title-line">A Shiny Cube presents:</p>
+        <h1 id="line2" class="title-line">Portfolio: <span class="name">Prakyath P Nayak</span></h1>
+      </header>
+      <p id="hint" class="hint" aria-hidden="true">click anywhere to begin</p>
+    </div>
+
+    <!-- ROOM: 4 walls + ceiling, navigated with on-screen or keyboard
+       arrows. Started by room.js on `intro:complete`. -->
+    <main id="app" hidden>
+      <section class="room-stage">
+        <div id="room-view" class="room-view" role="region" aria-label="Room view: wall 1">
+          <div id="room-scene" class="room-scene">
+            <img id="room-img" src="images/wall.jpg" alt="" draggable="false" />
+            <div id="doors" class="doors">
+              <button
+                class="door door-yt"
+                type="button"
+                data-door="0"
+                aria-label="YouTube — A Shiny Cube"
+              >
+                <img src="images/door-yt.png" alt="" draggable="false" />
+              </button>
+              <button
+                class="door door-in"
+                type="button"
+                data-door="1"
+                aria-label="LinkedIn — Prakyath P Nayak"
+              >
+                <img src="images/door-linkedin.png" alt="" draggable="false" />
+              </button>
+              <button
+                class="door door-gh"
+                type="button"
+                data-door="2"
+                aria-label="GitHub — PrakyathPNayak"
+              >
+                <img src="images/door-github.png" alt="" draggable="false" />
+              </button>
+            </div>
+          </div>
+          <div class="room-vignette" aria-hidden="true"></div>
+          <p id="room-toast" class="room-toast" aria-hidden="true">
+            use the arrows on the screen or your keyboard to move around
+          </p>
+          <p id="door-toast" class="room-toast" aria-hidden="true"></p>
+          <p id="door-tag" class="door-tag" aria-hidden="true"></p>
+          <button id="arrow-up" class="arrow arrow-up" type="button" aria-label="Look up">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5l10 14H2z" /></svg>
+          </button>
+          <button
+            id="arrow-down"
+            class="arrow arrow-down"
+            type="button"
+            aria-label="Look down"
+            hidden
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19L2 5h20z" /></svg>
+          </button>
+          <button id="arrow-left" class="arrow arrow-left" type="button" aria-label="Turn left">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14-10v20z" /></svg>
+          </button>
+          <button id="arrow-right" class="arrow arrow-right" type="button" aria-label="Turn right">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12L5 2v20z" /></svg>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/intro.js"></script>
+    <script src="js/room.js"></script>
+  </body>
+</html>

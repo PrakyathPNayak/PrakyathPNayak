@@ -1,0 +1,312 @@
+/* Room viewer: rounded viewport, fading black frame, edge arrows, toast. */
+
+#app {
+  background: #0c1015;
+  padding: 0;
+}
+
+.room-stage {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+/* Rounded rectangle + thick black frame that melts into the page. */
+.room-view {
+  position: relative;
+  width: min(97vw, calc((100dvh - 28px) * 1.7778));
+  aspect-ratio: 16 / 9;
+  border-radius: 34px;
+  overflow: hidden;
+  background: #000;
+  border: 12px solid #000;
+  /* Door geometry, single source of truth: js/room.js reads these same
+     variables to place the zoom centroid. Plain numbers in % / px. */
+  --door-h: 56;
+  --door-base: 2;
+  --door-lift: 90;
+  --door-gap: 90;
+  --door-yt: 0.5;
+  --door-in: 33;
+  --door-gh: 65.5;
+  box-shadow:
+    0 0 0 1px rgba(242, 232, 201, 0.14),
+    0 0 70px rgba(0, 0, 0, 0.95),
+    0 24px 80px rgba(0, 0, 0, 0.8);
+}
+
+/* Zoomable scene: wall/ceiling image + doors scale together like a camera. */
+.room-scene {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.room-scene.zoom {
+  /* Origin sits on the door centroid (set inline); the translate carries
+     that point to the centre of the frame. Per-door values in --zx/--zy. */
+  transform: translate(var(--zx, 0px), var(--zy, 0px)) scale(3);
+}
+
+#room-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: opacity 0.18s ease;
+}
+
+/* Crossfade helper: room.js adds .swap, swaps src, removes .swap. */
+.room-view.swap #room-img {
+  opacity: 0;
+}
+
+/* ---------- doors (wall 1): RGBA art with soft shadow ---------- */
+
+.doors {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.25s ease,
+    visibility 0s linear 0.25s;
+}
+
+.doors.open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.25s ease;
+}
+
+.door {
+  position: absolute;
+  bottom: calc(var(--door-base) * 1% + var(--door-lift) * 1px);
+  height: calc(var(--door-h) * 1%);
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.door img {
+  height: 100%;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45));
+  transition: filter 0.2s ease;
+}
+
+.door:hover img {
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45)) brightness(1.07);
+}
+
+.door:focus-visible {
+  outline: 2px solid #c8a96e;
+  outline-offset: 6px;
+}
+
+.door-yt {
+  left: calc(var(--door-yt) * 1% + var(--door-gap) * 1px);
+}
+
+.door-in {
+  left: calc(var(--door-in) * 1%);
+}
+
+.door-gh {
+  left: calc(var(--door-gh) * 1% - var(--door-gap) * 1px);
+}
+
+/* Side tag: black rectangle, white Comic Sans, top-right. Names the site
+   while zoomed into its door. */
+.door-tag {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  margin: 0;
+  padding: 0.55em 1em;
+  background: #000;
+  color: #fff;
+  font-family: "Comic Neue", "Comic Sans MS", "Chalkboard SE", cursive;
+  font-size: clamp(20px, 3.4vw, 30px);
+  opacity: 0;
+  transform: translateX(8px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  pointer-events: none;
+}
+
+.door-tag.show {
+  opacity: 1;
+  transform: none;
+}
+
+/* Soft fade-to-black at the frame edges, over the image. */
+.room-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 46%,
+    rgba(0, 0, 0, 0.55) 78%,
+    rgba(0, 0, 0, 0.92) 100%
+  );
+}
+
+/* ---------- edge arrows ---------- */
+
+.arrow {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.85;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.arrow svg {
+  width: 28px;
+  height: 28px;
+  fill: #f2e8c9;
+  stroke: none;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.85));
+}
+
+.arrow:hover {
+  background: transparent;
+  opacity: 1;
+}
+
+.arrow:active {
+  transform: scale(0.92);
+}
+
+.arrow:focus-visible {
+  outline: 2px solid #c8a96e;
+  outline-offset: 2px;
+}
+
+.arrow[hidden] {
+  display: none;
+}
+
+.arrow-up {
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.arrow-up:active {
+  transform: translateX(-50%) scale(0.92);
+}
+
+.arrow-down {
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.arrow-down:active {
+  transform: translateX(-50%) scale(0.92);
+}
+
+.arrow-left {
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.arrow-left:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+.arrow-right {
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.arrow-right:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+/* ---------- opening toast: fades in, holds, fades away ---------- */
+
+.room-toast {
+  position: absolute;
+  left: 50%;
+  bottom: 72px;
+  transform: translateX(-50%);
+  max-width: 82%;
+  margin: 0;
+  padding: 0.55em 1.1em;
+  text-align: center;
+  font-family: "Comic Neue", "Comic Sans MS", "Chalkboard SE", cursive;
+  font-size: clamp(14px, 2.2vw, 19px);
+  color: #f2e8c9;
+  background: rgba(0, 0, 0, 0.62);
+  border: 1px solid rgba(242, 232, 201, 0.25);
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.room-toast.play {
+  animation: toast-life 5s ease forwards;
+}
+
+@keyframes toast-life {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  72% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .room-toast {
+    white-space: normal;
+    bottom: 70px;
+  }
+
+  .arrow {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #room-img {
+    transition: none;
+  }
+
+  .room-scene {
+    transition: none;
+  }
+
+  .room-toast.play {
+    animation-duration: 5s;
+  }
+}
