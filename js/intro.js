@@ -72,6 +72,9 @@
     sizeStart = sizeEnd * 0.3;
   }
   window.addEventListener("resize", resize);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", resize);
+  }
   resize();
 
   // ---- performance: pre-baked film grain + adaptive quality ----
@@ -400,7 +403,15 @@
 
   function complete() {
     if (done || !armed) return;
+    // Landscape gate (see js/mobile.js): portrait-mobile taps must only see
+    // the rotate overlay, never dismiss the intro behind it.
+    if (document.body.classList.contains("needs-rotate")) return;
     done = true;
+    // Go immersive synchronously inside the dismiss gesture — awaiting here
+    // would lose transient activation and the browser would reject.
+    if (window.Mobile && typeof window.Mobile.enterImmersive === "function") {
+      window.Mobile.enterImmersive();
+    }
     overlay.classList.add("leaving");
     window.dispatchEvent(new CustomEvent("intro:complete"));
     for (const fn of waiters.splice(0)) {

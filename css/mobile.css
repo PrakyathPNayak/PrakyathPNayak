@@ -1,0 +1,249 @@
+/* Mobile browser compatibility: landscape-only gate, safe-area aware stage,
+ * touch-sized controls. Loaded after intro.css / room.css so it can override. */
+
+html,
+body {
+  overscroll-behavior: none;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+#intro,
+#app,
+.room-view,
+.room-scene,
+.door,
+.frame {
+  touch-action: manipulation;
+}
+
+/* ---------- app stage: respect notches + collapsing mobile chrome ---------- */
+
+#app {
+  /* Fallback first for browsers without dynamic viewport units. */
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0)
+    env(safe-area-inset-left, 0);
+}
+
+.room-view {
+  width: min(97vw, calc((100vh - 28px) * 1.7778), calc((100dvh - 28px) * 1.7778));
+  max-height: calc(100vh - env(safe-area-inset-top, 0) - env(safe-area-inset-bottom, 0) - 8px);
+  max-height: calc(100dvh - env(safe-area-inset-top, 0) - env(safe-area-inset-bottom, 0) - 8px);
+}
+
+/* ---------- landscape phones: short viewport, keep chrome reachable ---------- */
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .room-view {
+    width: min(98vw, calc((100dvh - 12px) * 1.7778));
+    border-width: 6px;
+    border-radius: 20px;
+  }
+
+  .room-toast {
+    bottom: 52px;
+    font-size: clamp(12px, 1.8vw, 15px);
+    padding: 0.4em 0.9em;
+  }
+
+  .art-toast {
+    bottom: 12px;
+    padding: 0.6rem 1rem;
+    max-height: 42dvh;
+    overflow-y: auto;
+  }
+
+  .art-toast-desc {
+    font-size: clamp(11px, 1.6vw, 13px);
+  }
+
+  .door-tag {
+    font-size: clamp(16px, 2.6vw, 22px);
+    top: 10px;
+    right: 10px;
+  }
+
+  .titles {
+    top: 7%;
+  }
+}
+
+/* ---------- touch-sized controls on coarse pointers ---------- */
+
+@media (pointer: coarse) {
+  .arrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .arrow svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .door,
+  .frame {
+    cursor: default;
+  }
+}
+
+/* ---------- fullscreen toggle (revealed by js/mobile.js on touch devices) ---------- */
+
+.fs-toggle {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(242, 232, 201, 0.3);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #f2e8c9;
+  cursor: pointer;
+  opacity: 0.9;
+  z-index: 6;
+}
+
+.fs-toggle[hidden] {
+  display: none;
+}
+
+.fs-toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
+.fs-toggle:active {
+  transform: scale(0.92);
+}
+
+.fs-toggle:focus-visible {
+  outline: 2px solid #c8a96e;
+  outline-offset: 2px;
+}
+
+/* ---------- landscape gate: rotate overlay ---------- */
+
+#rotate-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: calc(1.5rem + env(safe-area-inset-top, 0)) calc(1.5rem + env(safe-area-inset-right, 0))
+    calc(1.5rem + env(safe-area-inset-bottom, 0)) calc(1.5rem + env(safe-area-inset-left, 0));
+  background: #0a0a0c;
+  text-align: center;
+}
+
+/* Shown by js/mobile.js setting body.needs-rotate. The media query is a
+ * no-JS fallback so portrait phones never see a broken layout. */
+body.needs-rotate #rotate-overlay {
+  display: flex;
+}
+
+@media (orientation: portrait) and (pointer: coarse) {
+  #rotate-overlay:not([hidden]) {
+    display: flex;
+  }
+}
+
+body.needs-rotate {
+  overflow: hidden;
+}
+
+.rotate-card {
+  max-width: 26rem;
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+}
+
+.rotate-phone {
+  width: 84px;
+  height: 84px;
+  fill: #f2e8c9;
+}
+
+.rotate-phone-screen {
+  fill: #0a0a0c;
+}
+
+.rotate-phone-btn {
+  fill: #c8a96e;
+}
+
+.rotate-arrows {
+  stroke: #c8a96e;
+  stroke-width: 3;
+}
+
+.rotate-phone-body {
+  transform-origin: 32px 32px;
+  animation: rotate-body 2.2s ease-in-out infinite;
+}
+
+@keyframes rotate-body {
+  0%,
+  20% {
+    transform: rotate(0deg);
+  }
+  60%,
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
+.rotate-title {
+  margin: 0.5rem 0 0;
+  font-family: "Limelight", "Georgia", serif;
+  font-size: clamp(22px, 5vw, 30px);
+  letter-spacing: 0.08em;
+  color: #f2e8c9;
+}
+
+.rotate-sub {
+  margin: 0;
+  font-family: "Comic Neue", "Comic Sans MS", "Chalkboard SE", cursive;
+  font-size: clamp(14px, 3.6vw, 17px);
+  line-height: 1.5;
+  color: rgba(242, 232, 201, 0.8);
+}
+
+.rotate-action {
+  margin-top: 0.75rem;
+  padding: 0.8em 1.4em;
+  min-height: 44px;
+  border: 1px solid rgba(200, 169, 110, 0.7);
+  border-radius: 999px;
+  background: transparent;
+  color: #f2e8c9;
+  font-family: "Comic Neue", "Comic Sans MS", "Chalkboard SE", cursive;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.rotate-action:active {
+  transform: scale(0.96);
+}
+
+.rotate-action:focus-visible {
+  outline: 2px solid #c8a96e;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotate-phone-body {
+    animation: none;
+  }
+}
