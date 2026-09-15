@@ -32,9 +32,9 @@
     {
       id: "drawing-3",
       type: "image",
-      name: "Silver Reverie",
+      name: "The girl in black",
       description:
-        "Delicate monochrome profile study of a girl with flowing silver hair in quiet contemplation.",
+        "I saw this in a reel once and decided to draw it. I no longer can find the source of it 🥀",
       src: "images/drawing_3.webp",
       fallback: "images/drawing_3.png",
       aspect: 0.707,
@@ -48,7 +48,7 @@
       type: "image",
       name: "Sketchbook Studies",
       description:
-        "Expressive graphite character poses, gesture studies, and dynamic foreshortening from the sketchbook.",
+        "I have this small book where I do quick skectes when I'm bored. These are the first four drawings from it!",
       src: "images/drawing_6.webp",
       fallback: "images/drawing_6.jpeg",
       aspect: 0.562,
@@ -61,7 +61,7 @@
       id: "video-1",
       type: "video",
       name: "Ayasa - The Reason Why (Piano Cover)",
-      description: "Synthesia piano performance and visualizer cover performed by A Shiny Cube.",
+      description: "The only cover I've managed to produce with a proper synthasia scroll alignment to the piano",
       src: "images/thumb_video_1.jpg",
       videoId: "hqhT2fbeE6w",
       aspect: 16 / 9,
@@ -77,7 +77,7 @@
       type: "image",
       name: "Freefall",
       description:
-        "An exhilarating descent through boundless blue skies and towering clouds, reaching into the unknown.",
+        "One day, I had this dream where I kept falling endlessly. There was no ground in sight to be scared of and it was all just sky. That, inspired this.",
       src: "images/drawing_1.png", // Original uncompressed PNG preserving native linear-sRGB color space
       fallback: "images/drawing_1.png",
       aspect: 0.707,
@@ -89,9 +89,9 @@
     {
       id: "drawing-2",
       type: "image",
-      name: "Nocturne & The Horned Deity",
+      name: "The game",
       description:
-        "Dark gothic illustration of a girl holding a balloon beneath the crimson gaze of a horned skull and roses.",
+        "Art for a horror game we made. Good times!",
       src: "images/drawing_2.webp",
       fallback: "images/drawing_2.png",
       aspect: 0.707,
@@ -103,9 +103,9 @@
     {
       id: "drawing-4",
       type: "image",
-      name: "Mama, You Liar",
+      name: "Anya the clueless",
       description:
-        "Anya Forger fighting back tears behind her signature smug expression — 'Smiling didn't work at all'.",
+        "A work from memory of a scene from Spy x Family",
       src: "images/drawing_4.webp",
       fallback: "images/drawing_4.png",
       aspect: 16 / 9,
@@ -119,9 +119,9 @@
     {
       id: "drawing-7",
       type: "image",
-      name: "Lined Paper Melancholy",
+      name: "Boy",
       description:
-        "A pensive boy sketched in soft graphite on notebook paper, looking sideways in quiet thought.",
+        "Redraw of a random sketch I found on Google while browsing something to draw",
       src: "images/drawing_7.webp",
       fallback: "images/drawing_7.jpeg",
       aspect: 0.702,
@@ -135,7 +135,7 @@
       type: "image",
       name: "The Golden Iris",
       description:
-        "Luminous macro study capturing the celestial facets of an amber eye, blue locks, and golden ornaments.",
+        "I wanted to create an OC at that time. But sadly, this is all the progess I could put towards it.",
       src: "images/drawing_5.webp",
       fallback: "images/drawing_5.png",
       aspect: 1.081,
@@ -147,8 +147,8 @@
     {
       id: "video-2",
       type: "video",
-      name: "It's Been A While...",
-      description: "Moody original anime animated short and piano composition by A Shiny Cube.",
+      name: "Who's that P0k3mon?",
+      description: "My attempt at animating a popular character from a popular series (please don't sue me Nintendo🥀)",
       src: "images/thumb_video_2.jpg",
       videoId: "VqTtbqpxFxc",
       aspect: 16 / 9,
