@@ -72,32 +72,7 @@
                 <img src="images/door-github.png" alt="" draggable="false" />
               </button>
             </div>
-            <div id="art" class="art">
-              <button
-                class="frame frame-0"
-                type="button"
-                data-art="0"
-                aria-label="Digital art — freefall, large"
-              >
-                <img src="images/drawing.png" alt="" draggable="false" />
-              </button>
-              <button
-                class="frame frame-1"
-                type="button"
-                data-art="1"
-                aria-label="Digital art — freefall, medium"
-              >
-                <img src="images/drawing.png" alt="" draggable="false" />
-              </button>
-              <button
-                class="frame frame-2"
-                type="button"
-                data-art="2"
-                aria-label="Digital art — freefall, small"
-              >
-                <img src="images/drawing.png" alt="" draggable="false" />
-              </button>
-            </div>
+            <div id="art" class="art"></div>
           </div>
           <div class="room-vignette" aria-hidden="true"></div>
           <p id="room-toast" class="room-toast" aria-hidden="true">
@@ -105,6 +80,11 @@
           </p>
           <p id="door-toast" class="room-toast" aria-hidden="true"></p>
           <p id="door-tag" class="door-tag" aria-hidden="true"></p>
+          <div id="art-toast" class="art-toast" aria-live="polite">
+            <h3 class="art-toast-title"></h3>
+            <p class="art-toast-desc"></p>
+            <p class="art-toast-hint"></p>
+          </div>
           <button id="arrow-up" class="arrow arrow-up" type="button" aria-label="Look up">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5l10 14H2z" /></svg>
           </button>

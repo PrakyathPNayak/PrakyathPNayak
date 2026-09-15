@@ -29,17 +29,6 @@
   --door-yt: 0.5;
   --door-in: 33;
   --door-gh: 65.5;
-  /* Gallery geometry, same deal: js/room.js reads these for centroids. */
-  --art-lift: 300;
-  --f0-l: 18;
-  --f0-b: 17;
-  --f0-h: 46;
-  --f1-l: 40;
-  --f1-b: 17;
-  --f1-h: 36;
-  --f2-l: 57;
-  --f2-b: 40;
-  --f2-h: 24;
   box-shadow:
     0 0 0 1px rgba(242, 232, 201, 0.14),
     0 0 70px rgba(0, 0, 0, 0.95),
@@ -50,13 +39,16 @@
 .room-scene {
   position: absolute;
   inset: 0;
-  transition: transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1);
+  opacity: 1;
+  transition:
+    transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.22s ease;
 }
 
 .room-scene.zoom {
-  /* Origin sits on the door centroid (set inline); the translate carries
-     that point to the centre of the frame. Per-door values in --zx/--zy. */
-  transform: translate(var(--zx, 0px), var(--zy, 0px)) scale(3);
+  /* Origin sits on the item centroid (set inline); the translate carries
+     that point to the centre of the frame. Custom scale via --zoom-scale. */
+  transform: translate(var(--zx, 0px), var(--zy, 0px)) scale(var(--zoom-scale, 3));
 }
 
 #room-img {
@@ -66,12 +58,12 @@
   display: block;
   user-select: none;
   -webkit-user-select: none;
-  transition: opacity 0.18s ease;
 }
 
-/* Crossfade helper: room.js adds .swap, swaps src, removes .swap. */
-.room-view.swap #room-img {
+/* Transitional fade out / fade in when switching between rooms / walls */
+.room-view.switching .room-scene {
   opacity: 0;
+  pointer-events: none;
 }
 
 /* ---------- doors (wall 1): RGBA art with soft shadow ---------- */
@@ -81,15 +73,13 @@
   inset: 0;
   opacity: 0;
   visibility: hidden;
-  transition:
-    opacity 0.25s ease,
-    visibility 0s linear 0.25s;
+  pointer-events: none;
 }
 
 .doors.open {
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.25s ease;
+  pointer-events: auto;
 }
 
 .door {
@@ -131,22 +121,20 @@
   left: calc(var(--door-gh) * 1% - var(--door-gap) * 1px);
 }
 
-/* ---------- gallery (wall 3): drawing.png at three sizes ---------- */
+/* ---------- gallery (wall 3 / ART_WALL): framed art and playable videos ---------- */
 
 .art {
   position: absolute;
   inset: 0;
   opacity: 0;
   visibility: hidden;
-  transition:
-    opacity 0.25s ease,
-    visibility 0s linear 0.25s;
+  pointer-events: none;
 }
 
 .art.open {
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.25s ease;
+  pointer-events: auto;
 }
 
 .frame {
@@ -155,41 +143,213 @@
   border: none;
   background: transparent;
   cursor: pointer;
-}
-
-.frame img {
-  height: 100%;
-  width: auto;
+  box-sizing: border-box;
   display: block;
-  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45));
-  transition: filter 0.2s ease;
-}
-
-.frame:hover img {
-  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45)) brightness(1.07);
 }
 
 .frame:focus-visible {
-  outline: 2px solid #c8a96e;
-  outline-offset: 6px;
+  outline: 2px solid #a89473;
+  outline-offset: 3px;
 }
 
-.frame-0 {
-  left: calc(var(--f0-l) * 1%);
-  bottom: calc(var(--f0-b) * 1% + var(--art-lift) * 1px);
-  height: calc(var(--f0-h) * 1%);
+/* Physical pale wood picture frame moulding: natural birch/oak bevels, zero glow */
+.frame-housing {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(145deg, #e4d6bf 0%, #dac7ab 50%, #cdb595 100%);
+  padding: clamp(3px, 0.45vw, 6px);
+  border-radius: 2px;
+  border: clamp(2px, 0.35vw, 5px) solid #c5b090;
+  border-top-color: #ede2d0;
+  border-bottom-color: #b39b7a;
+  border-left-color: #dfd1bb;
+  border-right-color: #beaa8b;
+  outline: none;
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.45),
+    0 2px 5px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.frame-1 {
-  left: calc(var(--f1-l) * 1%);
-  bottom: calc(var(--f1-b) * 1% + var(--art-lift) * 1px);
-  height: calc(var(--f1-h) * 1%);
+.frame:hover .frame-housing {
+  transform: translateY(-2px);
+  border-color: #cebba0;
+  border-top-color: #f4ecdf;
+  border-bottom-color: #beaa8b;
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.55),
+    0 3px 7px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
-.frame-2 {
-  left: calc(var(--f2-l) * 1%);
-  bottom: calc(var(--f2-b) * 1% + var(--art-lift) * 1px);
-  height: calc(var(--f2-h) * 1%);
+/* Natural pale wood variations across pieces */
+.frame-drawing-1 .frame-housing {
+  /* Hero piece: slightly wider natural pale oak profile */
+  padding: clamp(4px, 0.55vw, 8px);
+  border-width: clamp(3px, 0.45vw, 6px);
+}
+
+.frame-drawing-5 .frame-housing {
+  /* Accent piece: pale ash wood tone */
+  background: linear-gradient(145deg, #eee3ce 0%, #e0d1b6 100%);
+}
+
+.frame-video .frame-housing {
+  /* Matching pale wood casing for display frames */
+  background: linear-gradient(145deg, #dfd0b7 0%, #d2c0a4 100%);
+}
+
+/* Inner passe-partout / mat: holds the art or video player */
+.frame-mat {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #0d0e10;
+  border-radius: 1px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset 0 1px 4px rgba(0, 0, 0, 0.8),
+    inset 0 0 1px rgba(0, 0, 0, 0.9);
+}
+
+.frame-mat img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.frame:hover .frame-mat img {
+  transform: scale(1.02);
+}
+
+/* Play button badge overlay on video frames: neutral frosted casing, zero neon */
+.frame-video .play-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(28px, 3.8vw, 42px);
+  height: clamp(28px, 3.8vw, 42px);
+  background: rgba(16, 16, 18, 0.78);
+  border: 1.5px solid rgba(245, 235, 220, 0.65);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+  pointer-events: none;
+}
+
+.frame-video .play-badge svg {
+  width: 44%;
+  height: 44%;
+  fill: #f5ede0;
+  margin-left: 2px;
+  transition: fill 0.2s ease;
+}
+
+.frame-video:hover .play-badge {
+  background: rgba(16, 16, 18, 0.94);
+  border-color: #ffffff;
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.frame-video:hover .play-badge svg {
+  fill: #ffffff;
+}
+
+/* Embedded YouTube player inside frame-mat */
+.frame-mat iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: #000;
+}
+
+/* ---------- art description toast (shown when zoomed into an artwork/video) ---------- */
+
+.art-toast {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(14px);
+  max-width: min(90%, 640px);
+  padding: 0.85rem 1.4rem;
+  background: rgba(10, 10, 12, 0.92);
+  border: 1px solid rgba(218, 199, 171, 0.28);
+  border-radius: 12px;
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.85),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    visibility 0s linear 0.35s;
+  z-index: 5;
+}
+
+.art-toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.art-toast-title {
+  margin: 0 0 0.25rem;
+  font-family: "Limelight", "Georgia", serif;
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 400;
+  color: #e4d6bf;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.art-toast-desc {
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: clamp(12px, 1.4vw, 15px);
+  line-height: 1.45;
+  color: #f2e8c9;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.art-toast-hint {
+  margin: 0.35rem 0 0;
+  font-family: "Comic Neue", "Comic Sans MS", "Chalkboard SE", cursive;
+  font-size: clamp(11px, 1.2vw, 13px);
+  color: rgba(242, 232, 201, 0.6);
 }
 
 /* Side tag: black rectangle, white Comic Sans, top-right. Names the site
